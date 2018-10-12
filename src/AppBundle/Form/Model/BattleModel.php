@@ -1,6 +1,8 @@
 <?php
 
 namespace AppBundle\Form\Model;
+use AppBundle\Entity\Programmer;
+use AppBundle\Entity\Project;
 
 class BattleModel
 {
@@ -22,7 +24,7 @@ class BattleModel
 	{
 		return $this->programmer;
 	}
-	
+
 	public function setProgrammer(Programmer $programmer)
 	{
 		$this->programmer = $programmer;

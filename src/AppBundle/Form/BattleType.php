@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use AppBundle\Form\Model\BattleModel;
+
 
 class BattleType extends AbstractType 
 {
@@ -17,7 +19,7 @@ class BattleType extends AbstractType
 			])
 			->add('project', EntityType::class, [ 
 				'class' => 'AppBundle\Entity\Project'
-			])
+			]);
 	}
 
 	public function configureOptions(OptionsResolver $resolver)

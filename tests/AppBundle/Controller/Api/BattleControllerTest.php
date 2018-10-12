@@ -21,9 +21,9 @@ class BattleControllerTest extends ApiTestCase
 			], 'weaverryan');
 
 		$data = array(
-			'project' => $project->getId(), 
-			'programmer' => $programmer->getId()
-		);
+            'project' => $project->getId(),
+            'programmer' => $programmer->getId()
+        );
 
 		$response = $this->client->post('/api/battles', [
 			'body' => json_encode($data),
@@ -31,7 +31,7 @@ class BattleControllerTest extends ApiTestCase
 		]);
 
 
-		$this->assertEquals(201, $response->getStatusCode())
+		$this->assertEquals(201, $response->getStatusCode());
 
 		$this->asserter()
 			->assertResponsePropertyExists($response, 'didProgrammerWin');
