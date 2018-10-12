@@ -56,7 +56,7 @@ class BattleControllerTest extends ApiTestCase
 			], 'weaverryan');
 
 		$data = array(
-            'projectId' => NULL,
+            'projectId' => null,
             'programmerId' => $programmer->getId()
         );
 

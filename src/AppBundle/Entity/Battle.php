@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="battle_battle")
@@ -23,12 +24,14 @@ class Battle
     /**
      * @ORM\ManyToOne(targetEntity="Programmer")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank()
      */
     private $programmer;
 
     /**
      * @ORM\ManyToOne(targetEntity="Project")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank()
      */
     private $project;
 
