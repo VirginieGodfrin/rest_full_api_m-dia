@@ -13,12 +13,17 @@ class BattleType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
+		// property_path: The form now expects the client to send projectId and programmerId . 
+		// But when it sets the final data on BattleModel , it will call setProject() and setProgrammer() .
+		// this is the way to have a field name that's different than the property name on your class
 		$builder
-			->add('programmer', EntityType::class, [
-				'class' => 'AppBundle\Entity\Programmer' 
+			->add('programmerId', EntityType::class, [
+				'class' => 'AppBundle\Entity\Programmer',
+				'property_path' => 'programmer' 
 			])
-			->add('project', EntityType::class, [ 
-				'class' => 'AppBundle\Entity\Project'
+			->add('projectId', EntityType::class, [ 
+				'class' => 'AppBundle\Entity\Project',
+				'property_path' => 'project'
 			]);
 	}
 
