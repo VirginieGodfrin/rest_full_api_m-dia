@@ -17,8 +17,7 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *     href=@Hateoas\Route(
  *         "api_programmers_show",
  *         parameters={"nickname"= "expr(object.getProgrammerNickname())"}
- *     ),
- *     embedded = "expr(object.getProgrammer())"
+ *     )
  * )
  */
 class Battle
@@ -34,6 +33,7 @@ class Battle
     /**
      * @ORM\ManyToOne(targetEntity="Programmer")
      * @ORM\JoinColumn(nullable=false)
+     * @Serializer\Expose()
      */
     private $programmer;
 
@@ -121,10 +121,7 @@ class Battle
         return $this->notes;
     }
 
-    /**
-     * @Serializer\VirtualProperty()
-     * @Serializer\SerializedName("programmer")
-     */
+
     public function getProgrammerNickname() {
         // VirtualProperty(): the serializer generates the field name by taking the method name and removing get 
         //SerializedName(): because we want this to be called programmer
