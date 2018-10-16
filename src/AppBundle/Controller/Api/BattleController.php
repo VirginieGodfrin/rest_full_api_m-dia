@@ -17,15 +17,16 @@ class BattleController extends BaseController
 	 * @Route("/api/battles") 
 	 * @Method("POST")
 	 */
-	public function newAction(Request $request ) 
+	public function newAction(Request $request) 
 	{
+		$user = $this->findUserByUsername('weaverryan');
 
-		$this->denyAccessUnlessGranted('ROLE_USER');
-
+		// $this->denyAccessUnlessGranted('ROLE_USER');
+		
 		$battleModel = new BattleModel();
 
 		$form = $this->createForm(BattleType::class, $battleModel, [ 
-			'user' => $this->getUser()
+			'user' => $user
 		]);
 
 		$this->processForm($request, $form);
