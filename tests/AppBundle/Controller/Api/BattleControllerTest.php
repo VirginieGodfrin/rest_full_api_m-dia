@@ -50,6 +50,11 @@ class BattleControllerTest extends ApiTestCase
 			$this->adjustUri('/api/programmers/Fred')
 		);
 
+		// $this->debugResponse($response);
+		$this->asserter()->assertResponsePropertyEquals( $response, 
+			'_embedded.programmer.nickname', 
+			'Fred'
+		);
 		// todo for later 
 		//$this->assertTrue($response->hasHeader('Location'));
 	}
