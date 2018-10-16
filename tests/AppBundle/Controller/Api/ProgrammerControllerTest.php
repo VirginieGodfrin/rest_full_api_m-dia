@@ -57,7 +57,7 @@ class ProgrammerControllerTest extends ApiTestCase
         $this->asserter()->assertResponsePropertyEquals($response, 'nickname', 'UnitTester');
         $this->asserter()->assertResponsePropertyEquals(
             $response,
-            '_links.self.href',
+            '_links.self',
             $this->adjustUri('/api/programmers/UnitTester')
         );
     }
