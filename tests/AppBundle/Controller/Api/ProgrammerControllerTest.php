@@ -33,6 +33,7 @@ class ProgrammerControllerTest extends ApiTestCase
         $finishedData = json_decode($response->getBody(true), true);
         $this->assertArrayHasKey('nickname', $finishedData);
         $this->assertEquals('ObjectOrienter', $finishedData['nickname']);
+        $this->assertEquals('application/hal+json', $response->getHeader('Content-Type')[0]);
     }
 
     public function testGETProgrammer()
@@ -45,6 +46,7 @@ class ProgrammerControllerTest extends ApiTestCase
         $response = $this->client->get('/api/programmers/UnitTester', [
             'headers' => $this->getAuthorizedHeaders('weaverryan')
         ]);
+        $response = $this->client->get('/api/programmers/UnitTester');
         $this->assertEquals(200, $response->getStatusCode());
         $this->asserter()->assertResponsePropertiesExist($response, array(
             'nickname',
@@ -55,7 +57,7 @@ class ProgrammerControllerTest extends ApiTestCase
         $this->asserter()->assertResponsePropertyEquals($response, 'nickname', 'UnitTester');
         $this->asserter()->assertResponsePropertyEquals(
             $response,
-            '_links.self',
+            '_links.self.href',
             $this->adjustUri('/api/programmers/UnitTester')
         );
     }
