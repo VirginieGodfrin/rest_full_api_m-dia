@@ -147,4 +147,12 @@ class ProgrammerController extends BaseController
 
         return new Response(null, 204);
     }
+
+    /**
+     * @Route("/api/programmers/{nickname}/battles", name="api_programmers_battles_list")
+     */
+    public function battlesListAction()
+    {
+
+    }
 }
