@@ -314,4 +314,37 @@ EOF;
         $this->assertEquals(401, $response->getStatusCode());
         $this->assertEquals('application/problem+json', $response->getHeader('Content-Type')[0]);
     }
+
+    public function testEditTagline()
+    {
+        $this->createProgrammer(array(
+            'nickname' => 'UnitTester',
+            'avatarNumber' => 3,
+            'tagLine' => 'The original UnitTester'
+        ));
+
+        $response = $this->client->put('/api/programmers/UnitTester/tagline', [
+            'headers' => $this->getAuthorizedHeaders('weaverryan'),
+            'body' => 'New Tag Line'
+        ]);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('New Tag Line', (string) $response->getBody());
+    }
+
+    public function testPowerUp()
+    {
+        $this->createProgrammer(array(
+            'nickname' => 'UnitTester',
+            'avatarNumber' => 3,
+            'powerLevel' => 10
+        ));
+
+        $response = $this->client->post('/api/programmers/UnitTester/powerup', [
+            'headers' => $this->getAuthorizedHeaders('weaverryan')
+        ]);
+        $this->assertEquals(200, $response->getStatusCode());
+        $powerLevel = $this->asserter()
+            ->readResponseProperty($response, 'powerLevel');
+        $this->assertNotEquals(10, $powerLevel, 'The level should change');
+    }
 }
