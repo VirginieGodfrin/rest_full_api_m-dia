@@ -15,18 +15,18 @@ use Hateoas\Configuration\Annotation as Hateoas;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProgrammerRepository")
  * @Serializer\ExclusionPolicy("all")
  * @Hateoas\Relation(
- *     "self",
- *     href=@Hateoas\Route(
- *         "api_programmers_show",
- *         parameters={"nickname"= "expr(object.getNickname())"}
- *     )
+ *      "self",
+ *      href=@Hateoas\Route(
+ *          "api_programmers_show",
+ *          parameters = { "nickname"= "expr(object.getNickname())" }
+ *      )
  * )
  * @Hateoas\Relation(
- *     "battles",
- *     href=@Hateoas\Route(
- *         "api_programmers_show",
- *         parameters={"nickname"= "expr(object.getNickname())"}
- *     )
+ *      "battles",
+ *      href=@Hateoas\Route(
+ *          "api_programmers_battles_list",
+ *          parameters = { "nickname"= "expr(object.getNickname())" }
+ *      )
  * )
  */
 class Programmer

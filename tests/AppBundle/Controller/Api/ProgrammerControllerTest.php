@@ -62,6 +62,31 @@ class ProgrammerControllerTest extends ApiTestCase
         );
     }
 
+    public function testFollowProgrammerBattlesLink()
+    {
+        $programmer = $this->createProgrammer(array(
+            'nickname' => 'UnitTester',
+            'avatarNumber' => 3,
+        ));
+        $project = $this->createProject('cool_project');
+
+        /** @var BattleManager $battleManager */
+        $battleManager = $this->getService('battle.battle_manager');
+        $battleManager->battle($programmer, $project);
+        $battleManager->battle($programmer, $project);
+        $battleManager->battle($programmer, $project);
+
+        $response = $this->client->get('/api/programmers/UnitTester', [
+            'headers' => $this->getAuthorizedHeaders('weaverryan')
+        ]);
+        $url = $this->asserter()
+            ->readResponseProperty($response, '_links.battles');
+        $response = $this->client->get($url, [
+            'headers' => $this->getAuthorizedHeaders('weaverryan')
+        ]);
+        $this->debugResponse($response);
+    }
+
     public function testGETProgrammerDeep()
     {
         $this->createProgrammer(array(
@@ -76,6 +101,7 @@ class ProgrammerControllerTest extends ApiTestCase
         $this->asserter()->assertResponsePropertiesExist($response, array(
             'user.username'
         ));
+        $this->debugResponse($response);
     }
 
     public function testGETProgrammersCollection()
